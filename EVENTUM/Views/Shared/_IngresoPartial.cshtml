@@ -1,0 +1,32 @@
+﻿@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("Salir", "Home", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        <li class="light-blue dropdown-modal">
+            <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                <img class="nav-user-photo" src="~/assets/images/avatars/user.jpg" alt="Hincha Tricolor" />
+                <span class="user-info">
+                    <small>Bienvenido,</small>
+                    @ViewBag.UserName
+                </span>
+
+                <i class="ace-icon fa fa-caret-down"></i>
+            </a>
+
+            <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                <li class="divider"></li>
+                <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="ace-icon fa fa-power-off"></i>Cerrar sesión</a></li>
+            </ul>
+        </li>
+    }
+}
+else
+{
+    <ul class="nav navbar navbar-top-links navbar-right mbn">
+        <li>@Html.ActionLink("Index", "index", "Home", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}
+
+
+
+

@@ -1,0 +1,131 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="vista" class="row">
+    <div class="card card-xxl-stretch mb-5 mb-xl-8">
+        <!--begin::Header-->
+        <div class="card-header border-0 pt-5">
+            <h3 class="card-title align-items-start flex-column">
+                <span class="card-label fw-bolder fs-3 mb-1">Título</span>
+                <span class="text-muted mt-1 fw-bold fs-7">Subtítulo</span>
+            </h3>
+            <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Click to add a user">
+                <a href="#" class="btn btn-sm btn-light btn-active-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_invite_friends">
+                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
+                    <span class="svg-icon svg-icon-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="black" />
+                            <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
+                        </svg>
+                    </span>
+                    <!--end::Svg Icon-->Tipo Propiedad
+                </a>
+            </div>
+        </div>
+        <!--end::Header-->
+        <!--begin::Body-->
+        <div class="card-body py-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h6><b>SOCIO: </b>@*@Model.usu_nombre*@</h6>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-6">
+                            @using (Html.BeginForm("GuardarSocio", "Home", FormMethod.Post, new { @class = "form-horizontal", id = "NewSocioDataForm", enctype = "multipart/form-data", onsubmit = "return false" }))
+
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="form-horizontal">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="form-group">
+                                        <label>Tipo Identificaci&oacute;n:</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon input-sm"><span style="color:#24760d" class="fa fa-credit-card fa-fw" title="Nombres Socio" data-toggle="tooltip" data-placement="top"></span></span>
+                                            @*@Html.DropDownList("TipoIdentificacion", ViewBag.TipoIdentificacion as List<SelectListItem>, new { @class = "form-control input-sm", id = "ddlTipoIdentificacionSocio", @disabled = "disabled", selected = "selected" })*@
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Identificaci&oacute;n:</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon input-sm"><span style="color:#24760d" class="fa fa-credit-card fa-fw" title="Nombres Socio" data-toggle="tooltip" data-placement="top"></span></span>
+                                            @*@Html.EditorFor(model => model.usu_identificacion, new { htmlAttributes = new { @class = "form-control input-sm disable", placeHolder = "Identificacion", required = "required", id = "txtIdentificacionSocio", maxlength = "100", onkeypress = "return soloLetrasYNumeros(event)", @disabled = "disabled" } })*@
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Localidad:</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon input-sm"><span style="color:#24760d" class="fa fa-credit-card fa-fw" title="Nombres Socio" data-toggle="tooltip" data-placement="top"></span></span>
+                                            @*@if (Model.localidad.loc_bloqueo == "0")
+                                                {
+                                                    <select id="ddlLocalidad" name="Localidad" class="form-control input-sm">
+
+                                                        @foreach (var item in @ViewBag.NoBloqueadas)
+                                                        {
+                                                            <option value="@item.Value" selected="@item.Selected">@item.Text</option>
+                                                        }
+                                                    </select>
+                                                }
+                                                else
+                                                {
+                                                    @Html.DropDownList("Localidad", ViewBag.Localidad as List<SelectListItem>, new { @class = "form-control input-sm", id = "ddlLocalidad", @disabled = "disabled", selected = "selected" })
+                                                }*@
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="col-md-4">Aforo Total:</label>
+                                        <div class="col-md-8">
+                                            <div class="input-group">
+                                                <span class="input-group-addon input-sm"><span style="color:#24760d" class="fa fa-sort-numeric-asc fa-fw" title="Nombres Socio" data-toggle="tooltip" data-placement="top"></span></span>
+                                                @*@Html.Editor("AforoTotal", new { htmlAttributes = new { @class = "form-control input-sm disable", placeHolder = "AforoTotal", required = "required", id = "AforoTotal", maxlength = "100", onkeypress = "return soloLetrasYNumeros(event)", @disabled = "disabled" } })*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="col-md-4">Aforo disponible:</label>
+                                        <div class="col-md-8">
+                                            <div class="input-group">
+                                                <span class="input-group-addon input-sm"><span style="color:#24760d" class="fa fa-sort-numeric-asc fa-fw" title="Nombres Socio" data-toggle="tooltip" data-placement="top"></span></span>
+                                                @*@Html.Editor("AforoDisponible", new { htmlAttributes = new { @class = "form-control input-sm disable", placeHolder = "Aforo Disponible", required = "required", id = "AforoDisponible", maxlength = "100", onkeypress = "return soloLetrasYNumeros(event)", @disabled = "disabled" } })*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>SUBIR CERTIFICADO DE VACUNACION O PRUEBA PCR</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon input-sm"><span style="color:#24760d" class="fa fa-file fa-fw" title="Apellidos Socio" data-toggle="tooltip" data-placement="top"></span></span>
+                                            <input class="form-control" type="file" value="" name="file" id="file" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Terminos y condiciones</label>
+                                        <input class="" type="checkbox" name="chkTerminos" value="" id="chkTerminos" />
+                                        <div class="input-group">
+                                            <div class="alert alert-info" id="terminos" style="text-align:justify">
+                                                BARCELONA SPORTING CLUB ha recopilado cuidadosamente el contenido de esta página web conforme a sus conocimientos actuales. El acceso a esta página web y su uso, así como el acceso y uso de las páginas web relacionadas o conectadas mediante enlaces, la entrega o carga de formularios de declaración de datos, archivos, certificados u cualquier otro documento que sea integrado a la misma, serán por cuenta y riesgo exclusivos del usuario. Quedan excluidas las reclamaciones por daños y perjuicios, producidos como consecuencia de la falta o la incorrección de los datos. BSC no será responsable en forma alguna por daños de clase alguna, ni por daños y perjuicios indirectos o consecuentes resultado del acceso o el uso de esta página web o de las páginas web relacionadas o conectadas a esta mediante enlaces.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group pull-right">
+                                        <button id="btnGuardarSocio" type="submit" class="btn btn-success" disabled="disabled">
+                                            <i class="fa fa-floppy-o" style="color:green" aria-hidden="true" data-toggle="tooltip" title="Guardar"></i>
+                                            Guardar
+                                        </button>
+                                    </div>
+
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
