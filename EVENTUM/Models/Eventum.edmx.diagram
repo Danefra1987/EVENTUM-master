@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="16a6b1602e704a0ea3d118234727c746" Name="Diagram1">
+        <EntityTypeShape EntityType="ObtelsaModel.espectador" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ObtelsaModel.localidad" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ObtelsaModel.localidad_disponible" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="ObtelsaModel.propietario" Width="1.5" PointX="6" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ObtelsaModel.propietario_localidad" Width="1.5" PointX="8.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="ObtelsaModel.socio" Width="1.5" PointX="6" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ObtelsaModel.sysdiagram" Width="1.5" PointX="5.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="ObtelsaModel.tipo_espectador" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ObtelsaModel.tipo_identificacion" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="ObtelsaModel.usuario" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ObtelsaModel.ventanilla" Width="1.5" PointX="0.75" PointY="14.875" IsExpanded="true" />
+        <AssociationConnector Association="ObtelsaModel.Reflocalidad8" ManuallyRouted="false" />
+        <AssociationConnector Association="ObtelsaModel.Reftipo_espectador9" ManuallyRouted="false" />
+        <AssociationConnector Association="ObtelsaModel.Reftipo_identificacion7" ManuallyRouted="false" />
+        <AssociationConnector Association="ObtelsaModel.Refventanilla13" ManuallyRouted="false" />
+        <AssociationConnector Association="ObtelsaModel.Reflocalidad1" ManuallyRouted="false" />
+        <AssociationConnector Association="ObtelsaModel.Reflocalidad11" ManuallyRouted="false" />
+        <AssociationConnector Association="ObtelsaModel.Reflocalidad5" ManuallyRouted="false" />
+        <AssociationConnector Association="ObtelsaModel.Reftipo_identificacion4" ManuallyRouted="false" />
+        <AssociationConnector Association="ObtelsaModel.Reftipo_identificacion3" ManuallyRouted="false" />
+        <AssociationConnector Association="ObtelsaModel.Reftipo_espectador12" ManuallyRouted="false" />
+        <AssociationConnector Association="ObtelsaModel.Reftipo_identificacion10" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

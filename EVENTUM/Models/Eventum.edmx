@@ -1,0 +1,888 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ObtelsaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="espectador">
+          <Key>
+            <PropertyRef Name="esp_id" />
+          </Key>
+          <Property Name="esp_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="esp_identificacion" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="esp_nombre" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="esp_email" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="esp_fecha_emision" Type="datetime" />
+          <Property Name="esp_certificado" Type="varchar(max)" />
+          <Property Name="id_socio" Type="int" Nullable="false" />
+          <Property Name="id_propietario" Type="int" Nullable="false" />
+          <Property Name="tii_valor" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="tie_valor" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="loc_codigo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ven_id" Type="int" Nullable="false" />
+          <Property Name="esp_estado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="localidad">
+          <Key>
+            <PropertyRef Name="loc_codigo" />
+          </Key>
+          <Property Name="loc_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="loc_nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="loc_aforo" Type="int" Nullable="false" />
+          <Property Name="loc_boletos_emitidos" Type="int" Nullable="false" />
+          <Property Name="loc_bloqueo" Type="char" MaxLength="1" />
+          <Property Name="loc_codigo" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="localidad_disponible">
+          <Key>
+            <PropertyRef Name="lod_id" />
+          </Key>
+          <Property Name="lod_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lod_nombre" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="lod_permitido" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="lod_estado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="propietario">
+          <Key>
+            <PropertyRef Name="pro_id" />
+          </Key>
+          <Property Name="pro_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tii_valor" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="pro_identificacion" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="pro_nombre" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="loc_codigo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="pro_email" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="pro_fecha_creacion" Type="datetime" Nullable="false" />
+          <Property Name="pro_fecha_actualizacion" Type="datetime" Nullable="false" />
+          <Property Name="pro_clave" Type="varchar" MaxLength="10" />
+          <Property Name="pro_estado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="propietario_localidad">
+          <Key>
+            <PropertyRef Name="prl_id" />
+          </Key>
+          <Property Name="prl_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pro_id" Type="int" Nullable="false" />
+          <Property Name="loc_codigo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="prl_disponible" Type="int" Nullable="false" />
+          <Property Name="prl_emitido" Type="int" Nullable="false" />
+          <Property Name="prl_contrato" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="prl_fecha_creacion" Type="datetime" Nullable="false" />
+          <Property Name="prl_fecha_actualizacion" Type="datetime" Nullable="false" />
+          <Property Name="prl_estado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="socio">
+          <Key>
+            <PropertyRef Name="soc_id" />
+          </Key>
+          <Property Name="soc_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tii_valor" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="soc_identificacion" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="soc_nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="loc_codigo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="soc_email" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="soc_contrato" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="soc_asiento_maximo" Type="int" Nullable="false" />
+          <Property Name="soc_asiento_emitido" Type="int" Nullable="false" />
+          <Property Name="soc_pases_libres" Type="int" Nullable="false" />
+          <Property Name="soc_pases_emitido" Type="int" Nullable="false" />
+          <Property Name="soc_med_tarifa" Type="int" Nullable="false" />
+          <Property Name="soc_med_tarifa_emitido" Type="int" Nullable="false" />
+          <Property Name="soc_fecha_creacion" Type="datetime" Nullable="false" />
+          <Property Name="soc_fecha_actualizacion" Type="datetime" Nullable="false" />
+          <Property Name="soc_clave" Type="varchar" MaxLength="10" />
+          <Property Name="soc_estado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tipo_espectador">
+          <Key>
+            <PropertyRef Name="tie_valor" />
+          </Key>
+          <Property Name="tie_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tie_nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="tie_valor" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tipo_identificacion">
+          <Key>
+            <PropertyRef Name="tii_valor" />
+          </Key>
+          <Property Name="tii_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tii_nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="tii_valor" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="usu_id" />
+          </Key>
+          <Property Name="usu_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usu_identificacion" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="usu_nombre" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="usu_email" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="usu_clave" Type="varchar" MaxLength="10" />
+          <Property Name="usu_asiento_maximo" Type="int" />
+          <Property Name="usu_asiento_emitido" Type="int" />
+          <Property Name="usu_fecha_emision" Type="datetime" />
+          <Property Name="usu_certificado" Type="varchar(max)" />
+          <Property Name="tii_valor" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="tie_valor" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="loc_codigo" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ventanilla">
+          <Key>
+            <PropertyRef Name="ven_id" />
+          </Key>
+          <Property Name="ven_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ven_nombre" Type="varchar" MaxLength="50" />
+          <Property Name="ven_aforo_maximo" Type="int" />
+          <Property Name="ven_aforo_emitido" Type="int" />
+          <Property Name="ven_jornada" Type="varchar" MaxLength="50" />
+          <Property Name="ven_horainicio" Type="datetime" />
+          <Property Name="ven_horafinal" Type="datetime" />
+          <Property Name="ven_estado" Type="int" />
+        </EntityType>
+        <Association Name="Reflocalidad1">
+          <End Role="localidad" Type="Self.localidad" Multiplicity="1" />
+          <End Role="socio" Type="Self.socio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="localidad">
+              <PropertyRef Name="loc_codigo" />
+            </Principal>
+            <Dependent Role="socio">
+              <PropertyRef Name="loc_codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reflocalidad11">
+          <End Role="localidad" Type="Self.localidad" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="localidad">
+              <PropertyRef Name="loc_codigo" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="loc_codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reflocalidad5">
+          <End Role="localidad" Type="Self.localidad" Multiplicity="1" />
+          <End Role="propietario" Type="Self.propietario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="localidad">
+              <PropertyRef Name="loc_codigo" />
+            </Principal>
+            <Dependent Role="propietario">
+              <PropertyRef Name="loc_codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reflocalidad8">
+          <End Role="localidad" Type="Self.localidad" Multiplicity="1" />
+          <End Role="espectador" Type="Self.espectador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="localidad">
+              <PropertyRef Name="loc_codigo" />
+            </Principal>
+            <Dependent Role="espectador">
+              <PropertyRef Name="loc_codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftipo_espectador12">
+          <End Role="tipo_espectador" Type="Self.tipo_espectador" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_espectador">
+              <PropertyRef Name="tie_valor" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="tie_valor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftipo_espectador9">
+          <End Role="tipo_espectador" Type="Self.tipo_espectador" Multiplicity="1" />
+          <End Role="espectador" Type="Self.espectador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_espectador">
+              <PropertyRef Name="tie_valor" />
+            </Principal>
+            <Dependent Role="espectador">
+              <PropertyRef Name="tie_valor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftipo_identificacion10">
+          <End Role="tipo_identificacion" Type="Self.tipo_identificacion" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_identificacion">
+              <PropertyRef Name="tii_valor" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="tii_valor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftipo_identificacion3">
+          <End Role="tipo_identificacion" Type="Self.tipo_identificacion" Multiplicity="1" />
+          <End Role="socio" Type="Self.socio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_identificacion">
+              <PropertyRef Name="tii_valor" />
+            </Principal>
+            <Dependent Role="socio">
+              <PropertyRef Name="tii_valor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftipo_identificacion4">
+          <End Role="tipo_identificacion" Type="Self.tipo_identificacion" Multiplicity="1" />
+          <End Role="propietario" Type="Self.propietario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_identificacion">
+              <PropertyRef Name="tii_valor" />
+            </Principal>
+            <Dependent Role="propietario">
+              <PropertyRef Name="tii_valor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftipo_identificacion7">
+          <End Role="tipo_identificacion" Type="Self.tipo_identificacion" Multiplicity="1" />
+          <End Role="espectador" Type="Self.espectador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_identificacion">
+              <PropertyRef Name="tii_valor" />
+            </Principal>
+            <Dependent Role="espectador">
+              <PropertyRef Name="tii_valor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Refventanilla13">
+          <End Role="ventanilla" Type="Self.ventanilla" Multiplicity="1" />
+          <End Role="espectador" Type="Self.espectador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ventanilla">
+              <PropertyRef Name="ven_id" />
+            </Principal>
+            <Dependent Role="espectador">
+              <PropertyRef Name="ven_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ObtelsaModelStoreContainer">
+          <EntitySet Name="espectador" EntityType="Self.espectador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="localidad" EntityType="Self.localidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="localidad_disponible" EntityType="Self.localidad_disponible" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="propietario" EntityType="Self.propietario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="propietario_localidad" EntityType="Self.propietario_localidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="socio" EntityType="Self.socio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tipo_espectador" EntityType="Self.tipo_espectador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tipo_identificacion" EntityType="Self.tipo_identificacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ventanilla" EntityType="Self.ventanilla" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Reflocalidad1" Association="Self.Reflocalidad1">
+            <End Role="localidad" EntitySet="localidad" />
+            <End Role="socio" EntitySet="socio" />
+          </AssociationSet>
+          <AssociationSet Name="Reflocalidad11" Association="Self.Reflocalidad11">
+            <End Role="localidad" EntitySet="localidad" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <AssociationSet Name="Reflocalidad5" Association="Self.Reflocalidad5">
+            <End Role="localidad" EntitySet="localidad" />
+            <End Role="propietario" EntitySet="propietario" />
+          </AssociationSet>
+          <AssociationSet Name="Reflocalidad8" Association="Self.Reflocalidad8">
+            <End Role="localidad" EntitySet="localidad" />
+            <End Role="espectador" EntitySet="espectador" />
+          </AssociationSet>
+          <AssociationSet Name="Reftipo_espectador12" Association="Self.Reftipo_espectador12">
+            <End Role="tipo_espectador" EntitySet="tipo_espectador" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <AssociationSet Name="Reftipo_espectador9" Association="Self.Reftipo_espectador9">
+            <End Role="tipo_espectador" EntitySet="tipo_espectador" />
+            <End Role="espectador" EntitySet="espectador" />
+          </AssociationSet>
+          <AssociationSet Name="Reftipo_identificacion10" Association="Self.Reftipo_identificacion10">
+            <End Role="tipo_identificacion" EntitySet="tipo_identificacion" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <AssociationSet Name="Reftipo_identificacion3" Association="Self.Reftipo_identificacion3">
+            <End Role="tipo_identificacion" EntitySet="tipo_identificacion" />
+            <End Role="socio" EntitySet="socio" />
+          </AssociationSet>
+          <AssociationSet Name="Reftipo_identificacion4" Association="Self.Reftipo_identificacion4">
+            <End Role="tipo_identificacion" EntitySet="tipo_identificacion" />
+            <End Role="propietario" EntitySet="propietario" />
+          </AssociationSet>
+          <AssociationSet Name="Reftipo_identificacion7" Association="Self.Reftipo_identificacion7">
+            <End Role="tipo_identificacion" EntitySet="tipo_identificacion" />
+            <End Role="espectador" EntitySet="espectador" />
+          </AssociationSet>
+          <AssociationSet Name="Refventanilla13" Association="Self.Refventanilla13">
+            <End Role="ventanilla" EntitySet="ventanilla" />
+            <End Role="espectador" EntitySet="espectador" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ObtelsaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="espectador">
+          <Key>
+            <PropertyRef Name="esp_id" />
+          </Key>
+          <Property Name="esp_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="esp_identificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="esp_nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="esp_email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="esp_fecha_emision" Type="DateTime" Precision="3" />
+          <Property Name="esp_certificado" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="id_socio" Type="Int32" Nullable="false" />
+          <Property Name="id_propietario" Type="Int32" Nullable="false" />
+          <Property Name="tii_valor" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="tie_valor" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="loc_codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ven_id" Type="Int32" Nullable="false" />
+          <Property Name="esp_estado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="localidad" Relationship="Self.Reflocalidad8" FromRole="espectador" ToRole="localidad" />
+          <NavigationProperty Name="tipo_espectador" Relationship="Self.Reftipo_espectador9" FromRole="espectador" ToRole="tipo_espectador" />
+          <NavigationProperty Name="tipo_identificacion" Relationship="Self.Reftipo_identificacion7" FromRole="espectador" ToRole="tipo_identificacion" />
+          <NavigationProperty Name="ventanilla" Relationship="Self.Refventanilla13" FromRole="espectador" ToRole="ventanilla" />
+        </EntityType>
+        <EntityType Name="localidad">
+          <Key>
+            <PropertyRef Name="loc_codigo" />
+          </Key>
+          <Property Name="loc_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="loc_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="loc_aforo" Type="Int32" Nullable="false" />
+          <Property Name="loc_boletos_emitidos" Type="Int32" Nullable="false" />
+          <Property Name="loc_bloqueo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="loc_codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="espectadors" Relationship="Self.Reflocalidad8" FromRole="localidad" ToRole="espectador" />
+          <NavigationProperty Name="socios" Relationship="Self.Reflocalidad1" FromRole="localidad" ToRole="socio" />
+          <NavigationProperty Name="usuarios" Relationship="Self.Reflocalidad11" FromRole="localidad" ToRole="usuario" />
+          <NavigationProperty Name="propietarios" Relationship="Self.Reflocalidad5" FromRole="localidad" ToRole="propietario" />
+        </EntityType>
+        <EntityType Name="localidad_disponible">
+          <Key>
+            <PropertyRef Name="lod_id" />
+          </Key>
+          <Property Name="lod_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="lod_nombre" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lod_permitido" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lod_estado" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="propietario">
+          <Key>
+            <PropertyRef Name="pro_id" />
+          </Key>
+          <Property Name="pro_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tii_valor" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="pro_identificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pro_nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="loc_codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pro_email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pro_fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="pro_fecha_actualizacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="pro_clave" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="pro_estado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="localidad" Relationship="Self.Reflocalidad5" FromRole="propietario" ToRole="localidad" />
+          <NavigationProperty Name="tipo_identificacion" Relationship="Self.Reftipo_identificacion4" FromRole="propietario" ToRole="tipo_identificacion" />
+        </EntityType>
+        <EntityType Name="propietario_localidad">
+          <Key>
+            <PropertyRef Name="prl_id" />
+          </Key>
+          <Property Name="prl_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pro_id" Type="Int32" Nullable="false" />
+          <Property Name="loc_codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prl_disponible" Type="Int32" Nullable="false" />
+          <Property Name="prl_emitido" Type="Int32" Nullable="false" />
+          <Property Name="prl_contrato" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prl_fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="prl_fecha_actualizacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="prl_estado" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="socio">
+          <Key>
+            <PropertyRef Name="soc_id" />
+          </Key>
+          <Property Name="soc_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tii_valor" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="soc_identificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="soc_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="loc_codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="soc_email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="soc_contrato" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="soc_asiento_maximo" Type="Int32" Nullable="false" />
+          <Property Name="soc_asiento_emitido" Type="Int32" Nullable="false" />
+          <Property Name="soc_pases_libres" Type="Int32" Nullable="false" />
+          <Property Name="soc_pases_emitido" Type="Int32" Nullable="false" />
+          <Property Name="soc_med_tarifa" Type="Int32" Nullable="false" />
+          <Property Name="soc_med_tarifa_emitido" Type="Int32" Nullable="false" />
+          <Property Name="soc_fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="soc_fecha_actualizacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="soc_clave" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="soc_estado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="localidad" Relationship="Self.Reflocalidad1" FromRole="socio" ToRole="localidad" />
+          <NavigationProperty Name="tipo_identificacion" Relationship="Self.Reftipo_identificacion3" FromRole="socio" ToRole="tipo_identificacion" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tipo_espectador">
+          <Key>
+            <PropertyRef Name="tie_valor" />
+          </Key>
+          <Property Name="tie_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tie_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tie_valor" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="espectadors" Relationship="Self.Reftipo_espectador9" FromRole="tipo_espectador" ToRole="espectador" />
+          <NavigationProperty Name="usuarios" Relationship="Self.Reftipo_espectador12" FromRole="tipo_espectador" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="tipo_identificacion">
+          <Key>
+            <PropertyRef Name="tii_valor" />
+          </Key>
+          <Property Name="tii_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tii_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tii_valor" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="espectadors" Relationship="Self.Reftipo_identificacion7" FromRole="tipo_identificacion" ToRole="espectador" />
+          <NavigationProperty Name="propietarios" Relationship="Self.Reftipo_identificacion4" FromRole="tipo_identificacion" ToRole="propietario" />
+          <NavigationProperty Name="socios" Relationship="Self.Reftipo_identificacion3" FromRole="tipo_identificacion" ToRole="socio" />
+          <NavigationProperty Name="usuarios" Relationship="Self.Reftipo_identificacion10" FromRole="tipo_identificacion" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="usu_id" />
+          </Key>
+          <Property Name="usu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usu_identificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usu_nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usu_email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usu_clave" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="usu_asiento_maximo" Type="Int32" />
+          <Property Name="usu_asiento_emitido" Type="Int32" />
+          <Property Name="usu_fecha_emision" Type="DateTime" Precision="3" />
+          <Property Name="usu_certificado" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="tii_valor" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="tie_valor" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="loc_codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="localidad" Relationship="Self.Reflocalidad11" FromRole="usuario" ToRole="localidad" />
+          <NavigationProperty Name="tipo_espectador" Relationship="Self.Reftipo_espectador12" FromRole="usuario" ToRole="tipo_espectador" />
+          <NavigationProperty Name="tipo_identificacion" Relationship="Self.Reftipo_identificacion10" FromRole="usuario" ToRole="tipo_identificacion" />
+        </EntityType>
+        <EntityType Name="ventanilla">
+          <Key>
+            <PropertyRef Name="ven_id" />
+          </Key>
+          <Property Name="ven_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ven_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ven_aforo_maximo" Type="Int32" />
+          <Property Name="ven_aforo_emitido" Type="Int32" />
+          <Property Name="ven_jornada" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ven_horainicio" Type="DateTime" Precision="3" />
+          <Property Name="ven_horafinal" Type="DateTime" Precision="3" />
+          <Property Name="ven_estado" Type="Int32" />
+          <NavigationProperty Name="espectadors" Relationship="Self.Refventanilla13" FromRole="ventanilla" ToRole="espectador" />
+        </EntityType>
+        <Association Name="Reflocalidad8">
+          <End Role="localidad" Type="Self.localidad" Multiplicity="1" />
+          <End Role="espectador" Type="Self.espectador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="localidad">
+              <PropertyRef Name="loc_codigo" />
+            </Principal>
+            <Dependent Role="espectador">
+              <PropertyRef Name="loc_codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftipo_espectador9">
+          <End Role="tipo_espectador" Type="Self.tipo_espectador" Multiplicity="1" />
+          <End Role="espectador" Type="Self.espectador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_espectador">
+              <PropertyRef Name="tie_valor" />
+            </Principal>
+            <Dependent Role="espectador">
+              <PropertyRef Name="tie_valor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftipo_identificacion7">
+          <End Role="tipo_identificacion" Type="Self.tipo_identificacion" Multiplicity="1" />
+          <End Role="espectador" Type="Self.espectador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_identificacion">
+              <PropertyRef Name="tii_valor" />
+            </Principal>
+            <Dependent Role="espectador">
+              <PropertyRef Name="tii_valor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Refventanilla13">
+          <End Role="ventanilla" Type="Self.ventanilla" Multiplicity="1" />
+          <End Role="espectador" Type="Self.espectador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ventanilla">
+              <PropertyRef Name="ven_id" />
+            </Principal>
+            <Dependent Role="espectador">
+              <PropertyRef Name="ven_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reflocalidad1">
+          <End Role="localidad" Type="Self.localidad" Multiplicity="1" />
+          <End Role="socio" Type="Self.socio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="localidad">
+              <PropertyRef Name="loc_codigo" />
+            </Principal>
+            <Dependent Role="socio">
+              <PropertyRef Name="loc_codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reflocalidad11">
+          <End Role="localidad" Type="Self.localidad" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="localidad">
+              <PropertyRef Name="loc_codigo" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="loc_codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reflocalidad5">
+          <End Role="localidad" Type="Self.localidad" Multiplicity="1" />
+          <End Role="propietario" Type="Self.propietario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="localidad">
+              <PropertyRef Name="loc_codigo" />
+            </Principal>
+            <Dependent Role="propietario">
+              <PropertyRef Name="loc_codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftipo_identificacion4">
+          <End Role="tipo_identificacion" Type="Self.tipo_identificacion" Multiplicity="1" />
+          <End Role="propietario" Type="Self.propietario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_identificacion">
+              <PropertyRef Name="tii_valor" />
+            </Principal>
+            <Dependent Role="propietario">
+              <PropertyRef Name="tii_valor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftipo_identificacion3">
+          <End Role="tipo_identificacion" Type="Self.tipo_identificacion" Multiplicity="1" />
+          <End Role="socio" Type="Self.socio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_identificacion">
+              <PropertyRef Name="tii_valor" />
+            </Principal>
+            <Dependent Role="socio">
+              <PropertyRef Name="tii_valor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftipo_espectador12">
+          <End Role="tipo_espectador" Type="Self.tipo_espectador" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_espectador">
+              <PropertyRef Name="tie_valor" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="tie_valor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftipo_identificacion10">
+          <End Role="tipo_identificacion" Type="Self.tipo_identificacion" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_identificacion">
+              <PropertyRef Name="tii_valor" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="tii_valor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ObtelsaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="espectadors" EntityType="Self.espectador" />
+          <EntitySet Name="localidads" EntityType="Self.localidad" />
+          <EntitySet Name="localidad_disponible" EntityType="Self.localidad_disponible" />
+          <EntitySet Name="propietarios" EntityType="Self.propietario" />
+          <EntitySet Name="propietario_localidad" EntityType="Self.propietario_localidad" />
+          <EntitySet Name="socios" EntityType="Self.socio" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="tipo_espectador" EntityType="Self.tipo_espectador" />
+          <EntitySet Name="tipo_identificacion" EntityType="Self.tipo_identificacion" />
+          <EntitySet Name="usuarios" EntityType="Self.usuario" />
+          <EntitySet Name="ventanillas" EntityType="Self.ventanilla" />
+          <AssociationSet Name="Reflocalidad8" Association="Self.Reflocalidad8">
+            <End Role="localidad" EntitySet="localidads" />
+            <End Role="espectador" EntitySet="espectadors" />
+          </AssociationSet>
+          <AssociationSet Name="Reftipo_espectador9" Association="Self.Reftipo_espectador9">
+            <End Role="tipo_espectador" EntitySet="tipo_espectador" />
+            <End Role="espectador" EntitySet="espectadors" />
+          </AssociationSet>
+          <AssociationSet Name="Reftipo_identificacion7" Association="Self.Reftipo_identificacion7">
+            <End Role="tipo_identificacion" EntitySet="tipo_identificacion" />
+            <End Role="espectador" EntitySet="espectadors" />
+          </AssociationSet>
+          <AssociationSet Name="Refventanilla13" Association="Self.Refventanilla13">
+            <End Role="ventanilla" EntitySet="ventanillas" />
+            <End Role="espectador" EntitySet="espectadors" />
+          </AssociationSet>
+          <AssociationSet Name="Reflocalidad1" Association="Self.Reflocalidad1">
+            <End Role="localidad" EntitySet="localidads" />
+            <End Role="socio" EntitySet="socios" />
+          </AssociationSet>
+          <AssociationSet Name="Reflocalidad11" Association="Self.Reflocalidad11">
+            <End Role="localidad" EntitySet="localidads" />
+            <End Role="usuario" EntitySet="usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="Reflocalidad5" Association="Self.Reflocalidad5">
+            <End Role="localidad" EntitySet="localidads" />
+            <End Role="propietario" EntitySet="propietarios" />
+          </AssociationSet>
+          <AssociationSet Name="Reftipo_identificacion4" Association="Self.Reftipo_identificacion4">
+            <End Role="tipo_identificacion" EntitySet="tipo_identificacion" />
+            <End Role="propietario" EntitySet="propietarios" />
+          </AssociationSet>
+          <AssociationSet Name="Reftipo_identificacion3" Association="Self.Reftipo_identificacion3">
+            <End Role="tipo_identificacion" EntitySet="tipo_identificacion" />
+            <End Role="socio" EntitySet="socios" />
+          </AssociationSet>
+          <AssociationSet Name="Reftipo_espectador12" Association="Self.Reftipo_espectador12">
+            <End Role="tipo_espectador" EntitySet="tipo_espectador" />
+            <End Role="usuario" EntitySet="usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="Reftipo_identificacion10" Association="Self.Reftipo_identificacion10">
+            <End Role="tipo_identificacion" EntitySet="tipo_identificacion" />
+            <End Role="usuario" EntitySet="usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ObtelsaModelStoreContainer" CdmEntityContainer="ObtelsaEntities">
+          <EntitySetMapping Name="espectadors">
+            <EntityTypeMapping TypeName="ObtelsaModel.espectador">
+              <MappingFragment StoreEntitySet="espectador">
+                <ScalarProperty Name="esp_id" ColumnName="esp_id" />
+                <ScalarProperty Name="esp_identificacion" ColumnName="esp_identificacion" />
+                <ScalarProperty Name="esp_nombre" ColumnName="esp_nombre" />
+                <ScalarProperty Name="esp_email" ColumnName="esp_email" />
+                <ScalarProperty Name="esp_fecha_emision" ColumnName="esp_fecha_emision" />
+                <ScalarProperty Name="esp_certificado" ColumnName="esp_certificado" />
+                <ScalarProperty Name="id_socio" ColumnName="id_socio" />
+                <ScalarProperty Name="id_propietario" ColumnName="id_propietario" />
+                <ScalarProperty Name="tii_valor" ColumnName="tii_valor" />
+                <ScalarProperty Name="tie_valor" ColumnName="tie_valor" />
+                <ScalarProperty Name="loc_codigo" ColumnName="loc_codigo" />
+                <ScalarProperty Name="ven_id" ColumnName="ven_id" />
+                <ScalarProperty Name="esp_estado" ColumnName="esp_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="localidads">
+            <EntityTypeMapping TypeName="ObtelsaModel.localidad">
+              <MappingFragment StoreEntitySet="localidad">
+                <ScalarProperty Name="loc_id" ColumnName="loc_id" />
+                <ScalarProperty Name="loc_nombre" ColumnName="loc_nombre" />
+                <ScalarProperty Name="loc_aforo" ColumnName="loc_aforo" />
+                <ScalarProperty Name="loc_boletos_emitidos" ColumnName="loc_boletos_emitidos" />
+                <ScalarProperty Name="loc_bloqueo" ColumnName="loc_bloqueo" />
+                <ScalarProperty Name="loc_codigo" ColumnName="loc_codigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="localidad_disponible">
+            <EntityTypeMapping TypeName="ObtelsaModel.localidad_disponible">
+              <MappingFragment StoreEntitySet="localidad_disponible">
+                <ScalarProperty Name="lod_id" ColumnName="lod_id" />
+                <ScalarProperty Name="lod_nombre" ColumnName="lod_nombre" />
+                <ScalarProperty Name="lod_permitido" ColumnName="lod_permitido" />
+                <ScalarProperty Name="lod_estado" ColumnName="lod_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="propietarios">
+            <EntityTypeMapping TypeName="ObtelsaModel.propietario">
+              <MappingFragment StoreEntitySet="propietario">
+                <ScalarProperty Name="pro_id" ColumnName="pro_id" />
+                <ScalarProperty Name="tii_valor" ColumnName="tii_valor" />
+                <ScalarProperty Name="pro_identificacion" ColumnName="pro_identificacion" />
+                <ScalarProperty Name="pro_nombre" ColumnName="pro_nombre" />
+                <ScalarProperty Name="loc_codigo" ColumnName="loc_codigo" />
+                <ScalarProperty Name="pro_email" ColumnName="pro_email" />
+                <ScalarProperty Name="pro_fecha_creacion" ColumnName="pro_fecha_creacion" />
+                <ScalarProperty Name="pro_fecha_actualizacion" ColumnName="pro_fecha_actualizacion" />
+                <ScalarProperty Name="pro_clave" ColumnName="pro_clave" />
+                <ScalarProperty Name="pro_estado" ColumnName="pro_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="propietario_localidad">
+            <EntityTypeMapping TypeName="ObtelsaModel.propietario_localidad">
+              <MappingFragment StoreEntitySet="propietario_localidad">
+                <ScalarProperty Name="prl_id" ColumnName="prl_id" />
+                <ScalarProperty Name="pro_id" ColumnName="pro_id" />
+                <ScalarProperty Name="loc_codigo" ColumnName="loc_codigo" />
+                <ScalarProperty Name="prl_disponible" ColumnName="prl_disponible" />
+                <ScalarProperty Name="prl_emitido" ColumnName="prl_emitido" />
+                <ScalarProperty Name="prl_contrato" ColumnName="prl_contrato" />
+                <ScalarProperty Name="prl_fecha_creacion" ColumnName="prl_fecha_creacion" />
+                <ScalarProperty Name="prl_fecha_actualizacion" ColumnName="prl_fecha_actualizacion" />
+                <ScalarProperty Name="prl_estado" ColumnName="prl_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="socios">
+            <EntityTypeMapping TypeName="ObtelsaModel.socio">
+              <MappingFragment StoreEntitySet="socio">
+                <ScalarProperty Name="soc_id" ColumnName="soc_id" />
+                <ScalarProperty Name="tii_valor" ColumnName="tii_valor" />
+                <ScalarProperty Name="soc_identificacion" ColumnName="soc_identificacion" />
+                <ScalarProperty Name="soc_nombre" ColumnName="soc_nombre" />
+                <ScalarProperty Name="loc_codigo" ColumnName="loc_codigo" />
+                <ScalarProperty Name="soc_email" ColumnName="soc_email" />
+                <ScalarProperty Name="soc_contrato" ColumnName="soc_contrato" />
+                <ScalarProperty Name="soc_asiento_maximo" ColumnName="soc_asiento_maximo" />
+                <ScalarProperty Name="soc_asiento_emitido" ColumnName="soc_asiento_emitido" />
+                <ScalarProperty Name="soc_pases_libres" ColumnName="soc_pases_libres" />
+                <ScalarProperty Name="soc_pases_emitido" ColumnName="soc_pases_emitido" />
+                <ScalarProperty Name="soc_med_tarifa" ColumnName="soc_med_tarifa" />
+                <ScalarProperty Name="soc_med_tarifa_emitido" ColumnName="soc_med_tarifa_emitido" />
+                <ScalarProperty Name="soc_fecha_creacion" ColumnName="soc_fecha_creacion" />
+                <ScalarProperty Name="soc_fecha_actualizacion" ColumnName="soc_fecha_actualizacion" />
+                <ScalarProperty Name="soc_clave" ColumnName="soc_clave" />
+                <ScalarProperty Name="soc_estado" ColumnName="soc_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ObtelsaModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipo_espectador">
+            <EntityTypeMapping TypeName="ObtelsaModel.tipo_espectador">
+              <MappingFragment StoreEntitySet="tipo_espectador">
+                <ScalarProperty Name="tie_id" ColumnName="tie_id" />
+                <ScalarProperty Name="tie_nombre" ColumnName="tie_nombre" />
+                <ScalarProperty Name="tie_valor" ColumnName="tie_valor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipo_identificacion">
+            <EntityTypeMapping TypeName="ObtelsaModel.tipo_identificacion">
+              <MappingFragment StoreEntitySet="tipo_identificacion">
+                <ScalarProperty Name="tii_id" ColumnName="tii_id" />
+                <ScalarProperty Name="tii_nombre" ColumnName="tii_nombre" />
+                <ScalarProperty Name="tii_valor" ColumnName="tii_valor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuarios">
+            <EntityTypeMapping TypeName="ObtelsaModel.usuario">
+              <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="usu_id" ColumnName="usu_id" />
+                <ScalarProperty Name="usu_identificacion" ColumnName="usu_identificacion" />
+                <ScalarProperty Name="usu_nombre" ColumnName="usu_nombre" />
+                <ScalarProperty Name="usu_email" ColumnName="usu_email" />
+                <ScalarProperty Name="usu_clave" ColumnName="usu_clave" />
+                <ScalarProperty Name="usu_asiento_maximo" ColumnName="usu_asiento_maximo" />
+                <ScalarProperty Name="usu_asiento_emitido" ColumnName="usu_asiento_emitido" />
+                <ScalarProperty Name="usu_fecha_emision" ColumnName="usu_fecha_emision" />
+                <ScalarProperty Name="usu_certificado" ColumnName="usu_certificado" />
+                <ScalarProperty Name="tii_valor" ColumnName="tii_valor" />
+                <ScalarProperty Name="tie_valor" ColumnName="tie_valor" />
+                <ScalarProperty Name="loc_codigo" ColumnName="loc_codigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ventanillas">
+            <EntityTypeMapping TypeName="ObtelsaModel.ventanilla">
+              <MappingFragment StoreEntitySet="ventanilla">
+                <ScalarProperty Name="ven_id" ColumnName="ven_id" />
+                <ScalarProperty Name="ven_nombre" ColumnName="ven_nombre" />
+                <ScalarProperty Name="ven_aforo_maximo" ColumnName="ven_aforo_maximo" />
+                <ScalarProperty Name="ven_aforo_emitido" ColumnName="ven_aforo_emitido" />
+                <ScalarProperty Name="ven_jornada" ColumnName="ven_jornada" />
+                <ScalarProperty Name="ven_horainicio" ColumnName="ven_horainicio" />
+                <ScalarProperty Name="ven_horafinal" ColumnName="ven_horafinal" />
+                <ScalarProperty Name="ven_estado" ColumnName="ven_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
